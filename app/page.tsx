@@ -11,9 +11,19 @@ export default async function Home() {
   const data: CharacterResponse = await res.json();
 
   return (
+    <div>
+      <Link href={`${process.env.BASE_URL}/character/?status=alive`}>
+      <p>Alive Characters</p>
+      </Link>
 
+       <Link href={`${process.env.BASE_URL}/character/?status=dead`}>
+      <p>Dead Characters</p>
+      </Link>
+
+       <Link href={`${process.env.BASE_URL}/character/?status=unknown`}>
+      <p>Unknown Characters</p>
+      </Link>
       <main>
-        
         {data.results.map((character) => (
           <div key={character.id}>
             <h2>{character.name}</h2>
@@ -24,6 +34,6 @@ export default async function Home() {
           </div>
         ))}
       </main>
-
+    </div>
   );
 }
