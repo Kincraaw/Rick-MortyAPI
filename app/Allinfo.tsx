@@ -1,7 +1,6 @@
 import { CharacterResponse } from './api/models/Charactersmodel';
-import Link from "next/link";
 
-export default async function Home() {
+export default async function Allinfo() {
   const res = await fetch(`${process.env.BASE_URL}/character`);
 
   if (!res.ok) {
@@ -9,16 +8,16 @@ export default async function Home() {
   }
 
   const data: CharacterResponse = await res.json();
+
   return (
     <div>
       <main>
         {data.results.map((character) => (
           <div key={character.id}>
-             <Link href={`${process.env.BASE_URL}/character/${character.id}`}>
             <img src={character.image} alt={character.name} width={150}/>
-            </Link>
             <h2>{character.name}</h2>
-            <p style={{ marginBottom: '25px' }} >{character.species}</p>
+            <p>{character.species}</p>
+            <p></p>
           </div>
         ))}
       </main>
