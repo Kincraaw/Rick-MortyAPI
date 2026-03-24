@@ -2,6 +2,8 @@ import { CharacterResponse } from './api/models/Charactersmodel';
 import Link from 'next/link';
 import { Suspense } from 'react';
 import Filters from './components/Filters';
+import { Searchbar } from './components/Searchbar';
+import '../app/style/Page.css';
 
 interface HomeProps {
   searchParams: Promise<{
@@ -14,7 +16,7 @@ interface HomeProps {
 
 export default async function Home({ searchParams }: HomeProps) {
   const params = await searchParams;
-
+  
   // Construction de l'URL avec les paramètres de filtre
   const queryParams = new URLSearchParams();
   if (params.status) queryParams.append('status', params.status);
@@ -38,7 +40,8 @@ export default async function Home({ searchParams }: HomeProps) {
       <Suspense fallback={<div style={{ height: '30px' }} />}>
         <Filters />
       </Suspense>
-      <main>
+      <Searchbar />
+      <main className='grid'>
         {data.results.map((character) => (
           <div key={character.id}>
             <h2>{character.name}</h2>
